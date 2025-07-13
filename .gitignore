@@ -1,0 +1,24 @@
+# Python
+*.pyc
+__pycache__/
+env/
+venv/
+*.sqlite3
+db.sqlite3
+
+# Django static & media (اختياري إذا تستعمل ملفات media)
+static/
+media/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Logs & system files
+*.log
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/

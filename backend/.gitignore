@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+
+# Env file (NE PAS pousser le .env dans GitHub)
+.env
+
+# Database (si sqlite utilisé en dev)
+db.sqlite3
+
+# Static / media generated
+/static/
+/media/
+
+# VSCode / IDE
+.vscode/
+.idea/
