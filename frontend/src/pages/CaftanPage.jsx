@@ -40,43 +40,81 @@ const CaftanPage = () => {
             const isLiked = likedItems.includes(caftan.slug);
 
             return (
-              <div
-                key={caftan.id}
-                className="relative bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300"
-              >
-                {/* ❤️ Like button */}
-                <button
+<div
+  key={caftan.id}
+   className="relative group bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition overflow-hidden"
+>
+  {/* ❤️ Like button */}
+
+                          <button
                   onClick={() => handleLike(caftan.slug)}
                   className="absolute top-3 right-3 z-10 bg-white p-1 rounded-full shadow-md hover:scale-110 transition"
                 >
-                  <Heart
-                    className={`w-5 h-5 transition-colors ${
-                      isLiked ? 'fill-red-500 text-red-500' : 'text-gray-400'
-                    }`}
-                  />
+<Heart
+  className={`w-5 h-5 transition-colors ${
+    isLiked ? 'fill-red-500 text-red-500' : 'text-gray-400'
+  }`}
+/>
+
                 </button>
 
-                <Link to={`/caftans/${caftan.slug}`}>
-                  <img
-                    src={caftan.image}
-                    alt={caftan.name}
-                     className="w-full h-[400px] object-contain rounded-t-xl transition-transform duration-500 hover:scale-105 bg-white"
-                  />
-                </Link>
 
-                <div className="p-5">
-                  <h2 className="text-lg font-semibold mb-2">{caftan.name}</h2>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-800 font-medium">{caftan.price} MAD</span>
-                    <Link
-                      to={`/caftans/${caftan.slug}`}
-                      className="text-sm bg-black text-white px-4 py-1.5 rounded-md hover:bg-gray-800 transition"
-                    >
-                      Voir plus
-                    </Link>
-                  </div>
-                </div>
-              </div>
+  {/* 📷 Image */}
+  <Link to={`/caftans/${caftan.slug}`}>
+    <div className="overflow-hidden">
+      <img
+        src={caftan.image}
+        alt={caftan.name}
+        className="w-full h-[350px] object-contain transition-transform duration-300 group-hover:scale-105"
+      />
+    </div>
+  </Link>
+
+  {/* 📦 Content */}
+  <div className="p-5 space-y-2">
+    {/* Name */}
+    <h3 className="text-lg font-semibold text-gray-800 group-hover:text-[#b08d57] transition-colors">
+      {caftan.name}
+    </h3>
+
+    {/* Rating */}
+    <div className="flex items-center space-x-1 text-sm text-yellow-400">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <svg
+          key={star}
+          xmlns="http://www.w3.org/2000/svg"
+          className={`w-4 h-4 ${
+            star <= caftan.ratings ? 'text-yellow-400' : 'text-gray-200'
+          }`}
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957h4.16c.969 0 1.371 1.24.588 1.81l-3.37 2.449 1.287 3.957c.3.921-.755 1.688-1.538 1.117L10 13.347l-3.37 2.449c-.783.57-1.838-.196-1.538-1.117l1.287-3.957-3.37-2.449c-.783-.57-.38-1.81.588-1.81h4.16l1.286-3.957z" />
+        </svg>
+      ))}
+    </div>
+
+    {/* Description */}
+    <p className="text-sm text-gray-500 line-clamp-1">
+      {caftan.description || 'Aucune description disponible.'}
+    </p>
+
+    {/* Price + Voir plus */}
+    <div className="flex justify-between items-center pt-2">
+      <span className="text-base font-medium text-gray-800">
+        {caftan.price} MAD
+      </span>
+      <Link
+        to={`/caftans/${caftan.slug}`}
+        className="text-sm text-[#b08d57] font-medium hover:underline"
+      >
+        Voir plus →
+      </Link>
+    </div>
+  </div>
+</div>
+
+
             );
           })}
         </div>

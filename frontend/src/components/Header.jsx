@@ -24,10 +24,11 @@ const Header = () => {
 
   return () => observer.disconnect();
 }, []);
- const handleNavigateToSection = (sectionId) => {
-    navigate("/", { state: { scrollTo: sectionId } });
-  
-  };
+
+  const handleNavigateToSection = (sectionId) => {
+  navigate("/", { state: { scrollTo: sectionId } });
+  setActiveSection(sectionId); // ✅ نحدثها مباشرة
+};
   return (
     <header className="fixed top-10 left-0 w-full z-40 bg-white/80 backdrop-blur-md shadow-lg border-b border-gray-200">
       <div className="container mx-auto px-6 md:px-16 py-4 flex justify-between items-center">
@@ -60,14 +61,18 @@ const Header = () => {
   </button>
 
   <button
-    onClick={() => navigate("/caftans")}
+    onClick={() => {
+  setActiveSection(null);
+  navigate("/caftans");
+}}
     className={`relative pb-1 hover:text-[#b08d57] ${
       window.location.pathname === "/caftans" ? "text-[#b08d57] font-semibold" : ""
     }`}
   >
     Tous les Caftans
     {window.location.pathname === "/caftans" && (
-      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#b08d57] rounded-full"></span>
+      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#b08d57] rounded-full transition-all duration-300"></span>
+
     )}
   </button>
 
@@ -79,7 +84,8 @@ const Header = () => {
   >
     Contact
     {activeSection === "contact" && (
-      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#b08d57] rounded-full"></span>
+      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#b08d57] rounded-full transition-all duration-300"></span>
+
     )}
   </button>
 </nav>
