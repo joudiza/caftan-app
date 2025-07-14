@@ -38,7 +38,7 @@ const App = () => {
         <Route path="/caftans" element={<UserLayout><CaftanPage /></UserLayout>} />
         <Route path="/caftans/by_category" element={<UserLayout><CaftanByCategoryPage /></UserLayout>} />
         <Route path="/caftans/:slug" element={<UserLayout><CaftanDetailPage /></UserLayout>} />
-
+        
 
           <Route
             path="/admin/dashboard"

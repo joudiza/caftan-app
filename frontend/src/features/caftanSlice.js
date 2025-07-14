@@ -194,11 +194,16 @@ const caftanSlice = createSlice({
 })
 .addCase(fetchCaftansByCategory.pending, (state) => {
   state.status = 'loading';
+  state.error = null;
 })
 .addCase(fetchCaftansByCategory.fulfilled, (state, action) => {
   state.status = 'succeeded';
-  state.caftans = action.payload;   
-});
+  state.caftans = Array.isArray(action.payload) ? action.payload : [];
+})
+.addCase(fetchCaftansByCategory.rejected, (state, action) => {
+  state.status = 'failed';
+  state.error = action.error.message;
+})
 }
 })
 

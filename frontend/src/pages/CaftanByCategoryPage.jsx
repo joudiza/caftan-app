@@ -9,7 +9,8 @@ const CaftanByCategoryPage = () => {
   const category = searchParams.get('category');
 
   const dispatch = useDispatch();
-  const { caftans, loading, error } = useSelector((state) => state.caftan);
+  const { caftans, status, error } = useSelector((state) => state.caftan);
+const loading = status === 'loading';
 
   const [likedItems, setLikedItems] = useState(() => {
     const stored = localStorage.getItem('likedCaftans');
@@ -21,6 +22,11 @@ const CaftanByCategoryPage = () => {
       dispatch(fetchCaftansByCategory(category));
     }
   }, [dispatch, category]);
+  useEffect(() => {
+  console.log("🔍 caftans:", caftans);
+  console.log("📦 loading:", loading);
+  console.log("❗ error:", error);
+}, [caftans, loading, error]);
 
   const handleLike = (slug) => {
     dispatch(likeCaftan(slug));
@@ -33,13 +39,16 @@ const CaftanByCategoryPage = () => {
 
   return (
     <div className="p-6 mt-44">
-      <h1 className="text-2xl font-bold mb-4">
-        Caftans in category: <span className="text-[#b08d57]">{category}</span>
-      </h1>
+{status === 'succeeded' && caftans.length === 0 && (
+  <p className="text-gray-500 text-center">Aucun caftan trouvé dans cette catégorie.</p>
+)}
 
-      {caftans.length === 0 && !loading && (
-        <p className="text-gray-500">Aucun caftan trouvé dans cette catégorie.</p>
-      )}
+{status === 'failed' && error && (
+  <p className="text-red-500 text-center">
+    Une erreur est survenue : {error === "Rejected" ? "Vérifiez votre connexion ou l’URL de la catégorie." : error}
+  </p>
+)}
+
 
       {loading ? (
         <p className="text-center text-gray-600 text-lg">⏳ Chargement en cours...</p>
@@ -48,7 +57,7 @@ const CaftanByCategoryPage = () => {
       ) : (
         <section className="container mx-auto px-4 py-16 font-sans text-black">
           <h2 className="text-3xl font-bold text-center mb-12 tracking-wide text-[#4b3621]">
-            Découvrez Nos Caftans
+            Découvrez Nos {category}
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">

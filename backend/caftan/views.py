@@ -122,14 +122,18 @@ class CaftanViewSet(viewsets.ModelViewSet):
     def by_category(self, request):
         category_name = request.query_params.get("category", "")
         if not category_name:
-            return self.error_response("Query parameter 'category' is required.", status.HTTP_400_BAD_REQUEST)
+            return self.error_response(
+                "Query parameter 'category' is required.",
+            status.HTTP_400_BAD_REQUEST
+        )
 
         caftans = Caftan.objects.filter(category__name__iexact=category_name)
-        if not caftans.exists():
-            return self.error_response("No caftans found for the provided category.", status.HTTP_404_NOT_FOUND)
 
+    # ✅ حتى إذا كانت النتيجة فارغة، ماشي مشكل: غادي ترجع []
         serializer = self.get_serializer(caftans, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+  
 
     # Get caftans by IDs
     @action(detail=False, methods=["get"])

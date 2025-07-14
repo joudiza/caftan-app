@@ -1,2 +1,7 @@
 
 @import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px; /* باش header مايغطيش القسم */
+}

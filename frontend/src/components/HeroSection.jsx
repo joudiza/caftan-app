@@ -37,8 +37,8 @@ const HeroSection = () => {
   };
 
   return (
-    <div
-      className="relative h-[600px] bg-cover bg-black/40 mt-41 pt-4 bg-center "
+    <div 
+      className="relative h-[600px] bg-cover bg-black/40 py-16 px-6 mt-41  bg-center "
       style={{
         backgroundImage: "url('/images/bg1.jpg')",
         backgroundRepeat: 'no-repeat',

@@ -1,5 +1,6 @@
 import Fix from "../components/Fix";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const UserLayout = ({ children }) => {
   return (
@@ -10,6 +11,7 @@ const UserLayout = ({ children }) => {
         <main className="">
           {children}
         </main>
+        <Footer />
       </div>
     </div>
   );
